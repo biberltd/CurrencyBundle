@@ -31,8 +31,16 @@ class AEDCurrency extends Drivers\CurrencyDriver {
         $currency_config = array(
             'code'      => substr(__CLASS__,0, 3),
             'name'      => 'United Arab Emirates Dirhams',
-            'symbol'    => ''
+            'symbol'    => '',
         );
         parent::__construct($currency_config);
     }
 }
+/**
+ * Change Log:
+ * **************************************
+ * v1.0.0                      Can Berkol
+ * **************************************
+ * A __construct()
+ * 
+ */
