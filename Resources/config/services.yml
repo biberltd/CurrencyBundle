@@ -1,0 +1,7 @@
+parameters:
+#    biberltd_currency.example.class: BiberLtd\Bundles\CurrencyBundle\Example
+
+services:
+#    biberltd_currency.example:
+#        class: %biberltd_currency.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
