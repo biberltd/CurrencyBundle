@@ -1,4 +1,7 @@
-biberltd_currency_bundle:
-    pattern:  /currency
-    defaults: { _controller: BiberLtdCurrencyBundle:Default:index }
+biberltd_currency_convert:
+    pattern:  /currency/convert/{value}/{from}/{to}/{service}
+    defaults: { _controller: BiberLtdCurrencyBundle:Default:convert }
+biberltd_currency_convert_formatted:
+    pattern:  /currency/convert_formatted/{value}/{from}/{to}/{service}/{code}/{code_position}/{symbol}/{symbol_position}/{precision}/{round}/{decimal_symbol}/{thousands_symbol}/{show_original}
+    defaults: { _controller: BiberLtdCurrencyBundle:Default:convertFormatted, code: "on", code_position: "start", symbol: "off", symbol_position: "start", precision: 2, round: "up", decimal_symbol: ".", thousands_symbol: ",", show_original: "off" }
 

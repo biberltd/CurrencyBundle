@@ -29,7 +29,7 @@ class UAHCurrency extends Drivers\CurrencyDriver {
      */
     public function __construct(){
         $currency_config = array(
-            'code'      => substr(__CLASS__,0, 3),
+            'code'      => substr(str_replace(__NAMESPACE__, '', __CLASS__), 1, 3),
             'name'      => 'Ukrainian Grivnas',
             'symbol'    => '',
         );

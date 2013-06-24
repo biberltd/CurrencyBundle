@@ -15,8 +15,8 @@
  */
 namespace BiberLtd\Bundles\CurrencyBundle\Exceptions;
 
-class CurrencyCodeException extends Exception {
+class CurrencyCodeException extends \Exception {
     public function __construct($message, $code = 0, Exception $previous = null) {
-        parent::__construct($message, $code, $previous);
+        parent::__construct('The currency with the code "'.$message.'" cannot be found. Please make sure that the corresponding driver has been installed in CurrencyBundle\\Drivers\\Currencies folder.', $code, $previous);
     }
 }

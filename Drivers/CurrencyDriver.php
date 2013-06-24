@@ -4,7 +4,7 @@
  * @package		BiberLtd\CurrencyBundle
  *
  * @author		Can Berkol
- * @version     1.0.0
+ * @version     1.0.1
  * @date        21.06.2013
  *
  * @copyright   Biber Ltd. (http://www.biberltd.com)
@@ -32,10 +32,11 @@ class CurrencyDriver {
      * @version         1.0.0
      * @author          Can Berkol
      *
-     * @param 			array 	$config 	Accepted keys: key, name, symbol
+     * @param 			array 	$config 	Accepted keys: code, name, symbol, codeLength
      *
      */
     public function __construct(array $config = array()){
+
         foreach($config as $key => $value){
             $setFn = 'set'.ucfirst($key);
             if(method_exists($this, $setFn)){
@@ -138,7 +139,7 @@ class CurrencyDriver {
      */
     public function setName($value){
         if(is_string($value)){
-            $this->code = $value;
+            $this->name = $value;
         }
         return $this;
     }
@@ -165,7 +166,14 @@ class CurrencyDriver {
 /**
  * Change Log:
  * **************************************
+ * v1.0.1                      Can Berkol
+ * 21.06.2013
+ * **************************************
+ * U _construct() Comment fixed.
+ *
+ * **************************************
  * v1.0.0                      Can Berkol
+ * 21.06.2013
  * **************************************
  * A $code
  * A $codeLength
