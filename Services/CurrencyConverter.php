@@ -13,8 +13,8 @@
  *
  * @copyright   Biber Ltd. (www.biberltd.com)
  *
- * @version     1.2.0
- * @date        21.06.2013
+ * @version     1.2.2
+ * @date        05.07.2013
  *
  */
 
@@ -35,17 +35,19 @@ class CurrencyConverter {
     protected   $services;
     /** @var $currencies collection of currencies */
     protected   $currencies;
-
+    /** @var $kernel Application kernel */
+    private   $kernel;
     /**
      * @name 			__construct()
      *  				Constructor function.
      *
      * @since			1.0.0
-     * @version         1.0.0
+     * @version         1.2.2
      * @author          Can Berkol
      *
      */
-    public function __construct(){
+    public function __construct($kernel){
+        $this->kernel = $kernel;
         $this->register_currencies();
         $this->register_services();
     }
@@ -68,7 +70,7 @@ class CurrencyConverter {
      *  				Converts the value from one currency to another using the provided service provider.
      * @author          Can Berkol
      * @since			1.0.0
-     * @version         1.0.0
+     * @version         1.2.2
      *
      * @throws          \BiberLtd\Bundles\CurrencyBundle\Exceptions\CurrencyServiceProviderException
      * @throws          \BiberLtd\Bundles\CurrencyBundle\Exceptions\CurrencyCodeException
@@ -86,15 +88,18 @@ class CurrencyConverter {
          * Check if selected conversion service is registered.
          */
         if(!isset($this->services[$service])){
-            throw new \BiberLtd\Bundles\CurrencyBundle\Exceptions\CurrencyServiceProviderException($service);
+            new \BiberLtd\Bundles\CurrencyBundle\Exceptions\CurrencyServiceProviderException($this->kernel, $service);
+            exit;
         }
         $service_provider = $this->services[$service];
         if(!isset($this->currencies[$from])){
-            throw new \BiberLtd\Bundles\CurrencyBundle\Exceptions\CurrencyCodeException($from);
+            new \BiberLtd\Bundles\CurrencyBundle\Exceptions\CurrencyCodeException($this->kernel, $from);
+            exit;
         }
         $from = $this->currencies[$from];
         if(!isset($this->currencies[$to])){
-            throw new \BiberLtd\Bundles\CurrencyBundle\Exceptions\CurrencyCodeException($to);
+            new \BiberLtd\Bundles\CurrencyBundle\Exceptions\CurrencyCodeException($this->kernel, $to);
+            exit;
         }
         $to = $this->currencies[$to];
         /**
@@ -113,7 +118,7 @@ class CurrencyConverter {
      *  				Formats number of the value_converted and saves into value_formatted.
      * @author          Can Berkol
      * @since		    1.0.0
-     * @version         1.0.0
+     * @version         1.2.2
      *
      * @throws          \BiberLtd\Bundles\CurrencyBundle\Exceptions\CurrencyCodeException
      *
@@ -134,10 +139,10 @@ class CurrencyConverter {
      */
     public final function format($currency, array $formatting_options = array()){
         if(!isset($this->currencies[$currency['to']])){
-            throw new \BiberLtd\Bundles\CurrencyBundle\Exceptions\CurrencyCodeException($currency['to']);
+            new \BiberLtd\Bundles\CurrencyBundle\Exceptions\CurrencyCodeException($this->kernel, $currency['to']);
         }
         if(!isset($this->currencies[$currency['from']])){
-            throw new \BiberLtd\Bundles\CurrencyBundle\Exceptions\CurrencyCodeException($currency['from']);
+            new \BiberLtd\Bundles\CurrencyBundle\Exceptions\CurrencyCodeException($this->kernel, $currency['from']);
         }
         $currency_to = $this->currencies[$currency['to']];
         $currency_from = $this->currencies[$currency['from']];
@@ -252,6 +257,9 @@ class CurrencyConverter {
         curl_setopt($connection,  CURLOPT_USERAGENT , $agent);
         curl_setopt($connection, CURLOPT_CONNECTTIMEOUT, $timeout);
         $xml_string = curl_exec($connection);
+        if(!$xml_string){
+            new \BiberLtd\Bundles\CurrencyBundle\Exceptions\ConnectionException($this->kernel);
+        }
         curl_close($connection);
         /** Remote connection ends */
         $conversions = new \SimpleXMLElement($xml_string);
@@ -328,6 +336,16 @@ class CurrencyConverter {
 }
 /**
  * Change Log:
+ * **************************************
+ * v1.2.2                      Can Berkol
+ * 05.07.2013
+ * **************************************
+ * ExceptionBundle dependency added.
+ * A $kernel
+ * U __construct()
+ * U convert() Exception namespace fixed.
+ * U format()
+ *
  * **************************************
  * v1.0.0                      Can Berkol
  * 21.06.2013

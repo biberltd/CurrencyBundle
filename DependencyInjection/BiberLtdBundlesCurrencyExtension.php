@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class BiberLtdCurrencyExtension extends Extension
+class BiberLtdBundlesCurrencyExtension extends Extension
 {
     /**
      * {@inheritDoc}
@@ -36,6 +36,6 @@ class BiberLtdCurrencyExtension extends Extension
      * @return	        string
      */
     public function getAlias(){
-        return 'biber_ltd_currency';
+        return 'biber_ltd_bundles_currency';
     }
 }

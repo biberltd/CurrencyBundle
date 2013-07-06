@@ -4,4 +4,9 @@ parameters:
 services:
     biberltd_currency.currency_converter:
         class:        BiberLtd\Bundles\CurrencyBundle\Services\CurrencyConverter
-        arguments:
+        arguments:    [@kernel]
+
+    biberltd_currency.routing_loader:
+        class: BiberLtd\Bundles\CurrencyBundle\Routing\CurrencyRouteLoader
+        tags:
+          - { name: routing.loader }
