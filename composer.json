@@ -1,5 +1,5 @@
 {
-    "name": "biberltd/currency-bundle",
+    "name": "biberltd/biberltd/bundles/currency-bundle",
     "type": "symfony-bundle",
     "description": "Handles conversion of numeric values from one currency to another.",
     "keywords": ["currency exchange", "currency converter", "forex", "e-commerce", "unit converter"],
