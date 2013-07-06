@@ -1,5 +1,5 @@
 {
-    "name": "biberltd/biberltd/bundles/currency-bundle",
+    "name": "biberltd/currency-bundle",
     "type": "symfony-bundle",
     "description": "Handles conversion of numeric values from one currency to another.",
     "keywords": ["currency exchange", "currency converter", "forex", "e-commerce", "unit converter"],
@@ -16,9 +16,9 @@
          "biberltd/exception-bundle": "master"
     },
     "autoload": {
-        "psr-0": { "BiberLtd\\Bundles\\CurrencyBundle": "" }
+        "psr-0": { "BiberLtd\\Bundles\\CurrencyBundle": "CurrencyBundle/" }
 
     },
     "minimum-stability": "dev",
-    "target-dir": "BiberLtd/Bundles/CurrencyBundle/"
+    "target-dir": "CurrencyBundle/"
 }
