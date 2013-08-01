@@ -20,5 +20,5 @@
 
     },
     "minimum-stability": "dev",
-    "target-dir": "CurrencyBundle/"
+    "target-dir": "BiberLtd/Bundles/CurrencyBundle/"
 }
